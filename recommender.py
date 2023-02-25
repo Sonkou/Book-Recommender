@@ -14,7 +14,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 header=st.container()
 with header:
-    title = '<p style="font-family:Arial Bold; color:Purple; font-size: 80px;">📚 BOOK 📚 RECOMMENDER</p>'
+    title = '<p style="font-family:Arial Bold; color:Blue; font-size: 80px;">📚 BOOK 📚 RECOMMENDER</p>'
     st.markdown(title,unsafe_allow_html=True)
 popularity=st.container()
 books=pd.read_csv("Books.csv")
@@ -30,7 +30,7 @@ df["Book-Title"]=df["Book-Title"].apply(lambda x: re.sub("[\W_]+"," ",x).strip()
 
 ################################### MOST POPULAR BOOKS ############################################################
 
-def popular_books(df,n=100):
+def popular_books(df,n=10000):
     rating_count=df.groupby("Book-Title").count()["Book-Rating"].reset_index()
     rating_count.rename(columns={"Book-Rating":"NumberOfVotes"},inplace=True)
     
@@ -54,9 +54,9 @@ def popular_books(df,n=100):
     return popularBooks[["Book-Title","NumberOfVotes","AverageRatings","Popularity"]].reset_index(drop=True).head(n)
 
 
-top_ten=pd.DataFrame(popular_books(df,5))
+top_ten=pd.DataFrame(popular_books(df,10))
 img_list=[]
-fig,ax=plt.subplots(1,5)
+fig,ax=plt.subplots(1,10)
 for i in range(len(top_ten["Book-Title"].tolist())):
     url=df.loc[df["Book-Title"]==top_ten["Book-Title"].tolist()[i],"Image-URL-L"][:1].values[0]
     img_list.append(url)
@@ -67,9 +67,8 @@ with popularity:
     most_pop = '<p style="font-family:Helvetica; color:deepskyblue; font-size: 40px;">📘 MOST POPULAR 5 BOOKS</p>'
     st.markdown(most_pop,unsafe_allow_html=True)
     st.image(img_list,width=130)
-    #book = st.text_input("Sign in to find out about other books that might interest you:","")
-    #book_names=df["Book-Title"].unique()
-    book_names=df["Book-Title"].value_counts()[0:200]
+
+    book_names=df["Book-Title"].value_counts()[0:10000]
     book_names=pd.DataFrame(book_names).reset_index()
     book_names.rename(columns={"index":"names"},inplace=True)
     book=st.selectbox("Choose the book you're reading for advice:",book_names["names"])
