@@ -64,7 +64,7 @@ for i in range(len(top_ten["Book-Title"].tolist())):
      
          
 with popularity:
-    most_pop = '<p style="font-family:Helvetica; color:deepskyblue; font-size: 40px;">📘 MOST POPULAR 5 BOOKS</p>'
+    most_pop = '<p style="font-family:Helvetica; color:deepskyblue; font-size: 40px;">📘 MOST POPULAR 10 BOOKS</p>'
     st.markdown(most_pop,unsafe_allow_html=True)
     st.image(img_list,width=130)
 
