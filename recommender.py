@@ -148,7 +148,7 @@ def content_based(bookTitle):
                 
                 books.append(common_books[common_books["index"]==similar_booksSorted[i][0]]["Book-Title"].item())
 
-            content_base= '<p style="font-family:Helvetica; color:Crimson; font-size: 40px;">📕OTHER USERS` SELECTIONS</p>'
+            content_base= '<p style="font-family:Helvetica; color:Crimson; font-size: 40px;">📕OTHER USERS SELECTIONS</p>'
             st.markdown(content_base,unsafe_allow_html=True)   
             for i in range(len(books)):
                 
