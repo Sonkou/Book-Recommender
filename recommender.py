@@ -68,10 +68,11 @@ with popularity:
     st.markdown(most_pop,unsafe_allow_html=True)
     st.image(img_list,width=130)
 
-    book_names=df["Book-Title"].value_counts()[0:10000]
-    book_names=pd.DataFrame(book_names).reset_index()
-    book_names.rename(columns={"index":"Book-Title"},inplace=True)
-    book=st.selectbox("Choose the book you're reading for advice:",book_names["Book-Title"])
+    options = np.concatenate(([''], df["Book-Title"].unique()))
+    #book_names=df["Book-Title"].value_counts()[0:10000]
+    #book_names=pd.DataFrame(book_names).reset_index()
+    #book_names.rename(columns={"index":"names"},inplace=True)
+    book=st.selectbox("Choose the book you're reading for advice:",options)
 ################################################################ ITEM BASED ######################################################################
 img_list_item=[]
 def item_based(bookTitle):
