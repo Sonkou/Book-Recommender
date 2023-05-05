@@ -70,7 +70,7 @@ with popularity:
     book_names = df["Book-Title"].value_counts()[0:10000]
     book_names = pd.DataFrame(book_names).reset_index()
     book_names.rename(columns={"index": "names"}, inplace=True)
-    book = st.selectbox("Choose the book you're reading for advice:", book_names["index"])
+    book = st.selectbox("Choose the book you're reading for advice:", book_names)
 ################################################################ ITEM BASED ######################################################################
 img_list_item = []
 
